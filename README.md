@@ -166,4 +166,19 @@ Example Request
   }
 }
 
+```
+Get Job Status
+
+GET /api/jobs/{jobId}
+
+Example Response
+{
+  "id": "123",
+  "type": "email",
+  "status": "COMPLETED",
+  "createdAt": "timestamp"
+}
+
+```
+
 
