@@ -199,15 +199,58 @@ COMPLETED
 FAILED
 RETRYING
 
-🔁 Job Processing Flow
-<p align="center"> <img src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif" width="450"> </p>
+## 🔁 Job Processing Flow
 
-1️⃣ API receives job request
-2️⃣ Job pushed to Redis queue
-3️⃣ Worker service polls queue
-4️⃣ Job processed asynchronously
-5️⃣ Result stored in MongoDB
-6️⃣ Client checks job status
+<p align="center">
+  <img src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif" width="450">
+</p>
 
+### 📌 How the System Works
 
+1️⃣ **Client sends job request**
+→ A user or application sends a job request to the **API Service** via REST endpoint.
+
+2️⃣ **API validates & creates job**
+→ The API validates input, generates a **Job ID**, and stores initial metadata.
+
+3️⃣ **Job pushed to Redis Queue**
+→ The job is published to the **Redis queue** for asynchronous processing.
+
+4️⃣ **Worker Service consumes job**
+→ Worker services continuously listen (poll/subscribe) to the Redis queue.
+
+5️⃣ **Job processed asynchronously**
+→ The worker executes the job using appropriate **job handlers**.
+
+6️⃣ **Result stored in MongoDB**
+→ Job results, status (`SUCCESS`, `FAILED`, `PROCESSING`) are stored in **MongoDB**.
+
+7️⃣ **Client checks job status**
+→ Clients query the API using the **Job ID** to retrieve the job result/status.
+
+---
+
+### ⚡ Flow Summary
+
+```
+Client
+  │
+  ▼
+API Service
+  │
+  ▼
+Redis Queue
+  │
+  ▼
+Worker Service
+  │
+  ▼
+Job Handler
+  │
+  ▼
+MongoDB
+  │
+  ▼
+Client (Fetch Job Status)
+```
 
