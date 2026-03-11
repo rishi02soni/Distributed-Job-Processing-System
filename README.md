@@ -253,125 +253,135 @@ MongoDB
   ▼
 Client (Fetch Job Status)
 ```
-🛡 Fault Tolerance Strategy
-Retry Policy
-retryCount < 3
-→ retry job
-If retry attempts exceed limit:
-Move job to Dead Letter Queue
+## 🛡 Fault Tolerance Strategy
 
-📊 Observability
-Monitoring implemented with:
+### 🔁 Retry Policy
 
-Prometheus (Metrics)
+* If `retryCount < 3`
+  → The system retries the job automatically.
 
-Grafana (Dashboards)
+* If retry attempts exceed the limit
+  → The job is moved to the **Dead Letter Queue (DLQ)** for further inspection or manual recovery.
 
-Structured Logging
+---
 
-Example Metrics
+## 📊 Observability
+
+Monitoring and logging are implemented using modern observability tools:
+
+* **Prometheus** → Collects system and application metrics
+* **Grafana** → Provides monitoring dashboards and visualization
+* **Structured Logging** → Enables easier debugging and log analysis
+
+### Example Metrics
+
+```
 jobs_processed_total
 jobs_failed_total
 queue_length
 worker_active_count
+```
 
-🐳 Docker Deployment
+---
 
-Build and run all services:
+## 🐳 Docker Deployment
+
+Build and run all services using Docker Compose:
+
+```bash
 docker-compose up --build
-Services Started
+```
 
-API Service
+### Services Started
 
-Worker Service
+* API Service
+* Worker Service
+* Redis
+* MongoDB
+* Prometheus
+* Grafana
 
-Redis
+---
 
-MongoDB
+## ☸ Kubernetes Deployment
 
-Prometheus
+Deploy all services to Kubernetes:
 
-Grafana
-
-☸ Kubernetes Deployment
-
-Deploy services using:
+```bash
 kubectl apply -f k8s/
+```
 
-📈 Scaling Strategy
+This deploys the system using Kubernetes manifests defined in the **k8s/** directory.
 
+---
+
+## 📈 Scaling Strategy
+
+```
 More Jobs → Queue Length Increases
-↓
-Kubernetes Auto Scales Workers
-↓
+        ↓
+Kubernetes Auto-Scales Worker Pods
+        ↓
 More Workers Process Jobs Faster
+```
 
-🚀 Future Improvements
+This enables **horizontal scalability** and efficient job processing during high load.
 
-Priority-based job scheduling
+---
 
-Delayed job execution
+## 🚀 Future Improvements
 
-Rate-limited job processing
+* Priority-based job scheduling
+* Delayed job execution
+* Rate-limited job processing
+* WebSocket-based live job updates
+* Distributed tracing using **OpenTelemetry**
+* Event-driven architecture with **Kafka**
 
-WebSocket live job updates
+---
 
-Distributed tracing using OpenTelemetry
+## 🧪 Running Locally
 
-Event-driven architecture with Kafka
+### 1️⃣ Clone Repository
 
-🧪 Running Locally
-Clone Repository
-
+```bash
 git clone https://github.com/yourusername/distributed-job-system
+cd distributed-job-system
+```
 
-Start Infrastructure
+### 2️⃣ Start Infrastructure
 
+```bash
 docker-compose up
+```
 
-Run Services
+### 3️⃣ Run Services
 
+```bash
 mvn spring-boot:run
+```
 
-📚 Key Distributed System Concepts Demonstrated
+---
 
-Queue-based system design
+## 📚 Key Distributed System Concepts Demonstrated
 
-Asynchronous processing
+* Queue-based system design
+* Asynchronous job processing
+* Horizontal scalability
+* Microservices architecture
+* Fault tolerance mechanisms
+* Observability and monitoring
 
-Horizontal scalability
+---
 
-Microservices architecture
-
-Fault tolerance
-
-Observability
-
-🤝 Contributing
+## 🤝 Contributing
 
 Pull requests are welcome.
+
 For major changes, please open an issue first to discuss what you would like to change.
 
-⭐ If you like this project
-
-Give it a star ⭐ on GitHub and help others discover it!
-
 ---
 
-✅ This version is:
+## ⭐ If You Like This Project
 
-- **Clean GitHub formatting**
-- **Microsoft-level professional**
-- **ATS friendly**
-- **Great for recruiters**
-- **Visually appealing**
-
----
-
-If you want, I can also give **3 extra things that make a repo look FAANG-level**, like:
-
-- **Architecture diagram section (System Design style)**
-- **System design explanation like in interviews**
-- **GitHub profile README preview**
-
-That will make your project look **like a Microsoft SDE portfolio project.**
+Give it a **star ⭐ on GitHub** and help others discover it!
