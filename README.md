@@ -14,9 +14,8 @@
 
 ---
 <p align="center">
-<img src="[https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif](https://integration-developer.de/en/wp-content/uploads/2024/10/diagram-export-10-2-2024-2_10_18-PM.png)" width="500">
+  <img src="https://integration-developer.de/en/wp-content/uploads/2024/10/diagram-export-10-2-2024-2_10_18-PM.png" width="900"/>
 </p>
-
 A **cloud-native distributed backend system** designed to process asynchronous background jobs at scale.
 
 The system decouples **job submission from execution** using a **Redis-powered distributed queue**, enabling scalable and fault-tolerant job processing with horizontally scalable worker services.
