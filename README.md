@@ -180,5 +180,34 @@ Example Response
 }
 
 ```
+🗃 Job Data Model
+{
+  "id": "jobId",
+  "type": "email",
+  "status": "QUEUED",
+  "payload": {},
+  "result": {},
+  "retryCount": 0,
+  "createdAt": "timestamp",
+  "completedAt": "timestamp"
+}
+```
+Job Status Types
+QUEUED
+PROCESSING
+COMPLETED
+FAILED
+RETRYING
+
+🔁 Job Processing Flow
+<p align="center"> <img src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif" width="450"> </p>
+
+1️⃣ API receives job request
+2️⃣ Job pushed to Redis queue
+3️⃣ Worker service polls queue
+4️⃣ Job processed asynchronously
+5️⃣ Result stored in MongoDB
+6️⃣ Client checks job status
+
 
 
