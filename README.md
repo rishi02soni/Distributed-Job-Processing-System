@@ -15,7 +15,7 @@
 ---
 
 <p align="center">
-  <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="500">
+<img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="500">
 </p>
 
 A **cloud-native distributed backend system** designed to process asynchronous background jobs at scale.
