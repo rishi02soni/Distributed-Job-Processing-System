@@ -253,4 +253,125 @@ MongoDB
   ▼
 Client (Fetch Job Status)
 ```
+🛡 Fault Tolerance Strategy
+Retry Policy
+retryCount < 3
+→ retry job
+If retry attempts exceed limit:
+Move job to Dead Letter Queue
 
+📊 Observability
+Monitoring implemented with:
+
+Prometheus (Metrics)
+
+Grafana (Dashboards)
+
+Structured Logging
+
+Example Metrics
+jobs_processed_total
+jobs_failed_total
+queue_length
+worker_active_count
+
+🐳 Docker Deployment
+
+Build and run all services:
+docker-compose up --build
+Services Started
+
+API Service
+
+Worker Service
+
+Redis
+
+MongoDB
+
+Prometheus
+
+Grafana
+
+☸ Kubernetes Deployment
+
+Deploy services using:
+kubectl apply -f k8s/
+
+📈 Scaling Strategy
+
+More Jobs → Queue Length Increases
+↓
+Kubernetes Auto Scales Workers
+↓
+More Workers Process Jobs Faster
+
+🚀 Future Improvements
+
+Priority-based job scheduling
+
+Delayed job execution
+
+Rate-limited job processing
+
+WebSocket live job updates
+
+Distributed tracing using OpenTelemetry
+
+Event-driven architecture with Kafka
+
+🧪 Running Locally
+Clone Repository
+
+git clone https://github.com/yourusername/distributed-job-system
+
+Start Infrastructure
+
+docker-compose up
+
+Run Services
+
+mvn spring-boot:run
+
+📚 Key Distributed System Concepts Demonstrated
+
+Queue-based system design
+
+Asynchronous processing
+
+Horizontal scalability
+
+Microservices architecture
+
+Fault tolerance
+
+Observability
+
+🤝 Contributing
+
+Pull requests are welcome.
+For major changes, please open an issue first to discuss what you would like to change.
+
+⭐ If you like this project
+
+Give it a star ⭐ on GitHub and help others discover it!
+
+---
+
+✅ This version is:
+
+- **Clean GitHub formatting**
+- **Microsoft-level professional**
+- **ATS friendly**
+- **Great for recruiters**
+- **Visually appealing**
+
+---
+
+If you want, I can also give **3 extra things that make a repo look FAANG-level**, like:
+
+- **Architecture diagram section (System Design style)**
+- **System design explanation like in interviews**
+- **GitHub profile README preview**
+
+That will make your project look **like a Microsoft SDE portfolio project.**
