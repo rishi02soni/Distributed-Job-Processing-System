@@ -1,0 +1,45 @@
+package com.example.worker.worker;
+
+import com.example.worker.model.Job;
+import com.example.worker.repository.JobRepository;
+import com.example.worker.service.JobProcessor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component
+public class JobWorker {
+
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    @Autowired
+    private JobProcessor jobProcessor;
+
+    @Scheduled(fixedDelay = 2000)
+    public void processJob(){
+
+        String jobId = (String) redisTemplate
+                .opsForList()
+                .rightPop("job_queue");
+
+        if(jobId == null) return;
+
+        Job job = jobRepository.findById(jobId).orElse(null);
+
+        if(job == null) return;
+
+        job.setStatus("PROCESSING");
+        jobRepository.save(job);
+
+        jobProcessor.process(job);
+
+        job.setStatus("COMPLETED");
+        jobRepository.save(job);
+
+    }
+}
