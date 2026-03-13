@@ -1,0 +1,28 @@
+package com.example.worker.service;
+
+import com.example.worker.model.Job;
+import org.springframework.stereotype.Service;
+
+@Service
+public class JobProcessor {
+
+    public void process(Job job){
+
+        switch (job.getType()){
+
+            case "email":
+                System.out.println("Sending email...");
+                break;
+
+            case "report":
+                System.out.println("Generating report...");
+                break;
+
+            case "image":
+                System.out.println("Processing image...");
+                break;
+
+        }
+
+    }
+}
