@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jobds-config
+  namespace: job-processing
+data:
+  MONGODB_URI: "mongodb://mongodb-service:27017/jobprocessing"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  WORKER_ENABLED: "true"
+  WORKER_CONCURRENCY: "4"
+  DEFAULT_MAX_RETRIES: "3"
+  BACKOFF_BASE_MS: "2000"
+  BACKOFF_MULTIPLIER: "2.0"
+  JOB_TIMEOUT_SECONDS: "60"

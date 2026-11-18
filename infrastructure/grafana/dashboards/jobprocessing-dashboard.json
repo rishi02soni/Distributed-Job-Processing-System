@@ -1,0 +1,117 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 0 },
+      "id": 1,
+      "title": "Total Processed Jobs",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "sum(job_processing_completed_total) or vector(0)",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto"
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 6, "w": 6, "x": 6, "y": 0 },
+      "id": 2,
+      "title": "Failed Jobs",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "sum(job_processing_failed_total) or vector(0)",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area"
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 6, "w": 6, "x": 12, "y": 0 },
+      "id": 3,
+      "title": "Throughput (Jobs / Sec)",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "sum(rate(job_processing_duration_seconds_count[1m])) or vector(0)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 6, "w": 6, "x": 18, "y": 0 },
+      "id": 4,
+      "title": "JVM Memory Used",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "sum(jvm_memory_used_bytes{area=\"heap\"}) / sum(jvm_memory_max_bytes{area=\"heap\"}) * 100",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 6 },
+      "id": 5,
+      "title": "Job Processing Duration Percentiles (p50, p90, p99)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(job_processing_duration_seconds_bucket[1m])) by (le))",
+          "legendFormat": "p50 Median",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.90, sum(rate(job_processing_duration_seconds_bucket[1m])) by (le))",
+          "legendFormat": "p90",
+          "refId": "B"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(job_processing_duration_seconds_bucket[1m])) by (le))",
+          "legendFormat": "p99 Tail",
+          "refId": "C"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 6 },
+      "id": 6,
+      "title": "HTTP Server Response Rate by Status",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "sum(rate(http_server_requests_seconds_count[1m])) by (status)",
+          "legendFormat": "Status {{status}}",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["jobs", "redis", "distributed"],
+  "time": { "from": "now-15m", "to": "now" },
+  "title": "Distributed Job Processing System Overview",
+  "version": 1
+}

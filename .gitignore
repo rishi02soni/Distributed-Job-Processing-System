@@ -1,0 +1,34 @@
+# Environment variables
+.env
+.env.local
+
+# Build output
+target/
+dist/
+build/
+*.class
+*.tsbuildinfo
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Portable tools & cache
+.tools/
+.mvn/
+*.log
+
+# IDE & Editor
+.idea/
+.vscode/
+*.iml
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+*.lcov
