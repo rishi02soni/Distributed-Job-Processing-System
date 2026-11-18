@@ -1,6 +1,6 @@
 # Distributed Job Processing System
 
-[![CI Pipeline](https://github.com/engineering/distributed-job-processing-system/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
+
 [![Java 21](https://img.shields.io/badge/Java-21%20LTS-orange.svg)](https://adoptium.net/)
 [![Spring Boot 3](https://img.shields.io/badge/Spring%20Boot-3.3.4-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Redis Streams](https://img.shields.io/badge/Queue-Redis%20Streams-red.svg)](https://redis.io/)
